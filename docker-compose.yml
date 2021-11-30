@@ -29,6 +29,7 @@ services:
       - REDIS_HOST=${REDIS_HOST}
       - APP_ENV=${APP_ENV}
       - RAILS_ENV=${RAILS_ENV}
+      - PIXABAY_API_KEY=${PIXABAY_API_KEY}
     depends_on:
       - pf_database
       - pf_redis
