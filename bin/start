@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Wait for services to be available
+./bin/wait-for-services.sh
+
+# Install dependencies
+bundle install
+
+# Remove any leftover pid files from previous runs
+rm -f ./tmp/pids/server.pid
+
+# Launch app server
+bundle exec rails s -b 0.0.0.0 -p 8000
