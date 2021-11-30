@@ -19,7 +19,7 @@ RUN gem install bundler:2.2.32
 
 # Set up non-root user
 RUN addgroup --system --gid 1000 pixabay_feed
-RUN adduser --system --gid 1000 --uid 1000 --home /myapp/* pixabay_feed
+RUN adduser --system --gid 1000 --uid 1000 --home /myapp pixabay_feed
 
 USER pixabay_feed
 WORKDIR /myapp
@@ -27,7 +27,9 @@ WORKDIR /myapp
 # Install Gemfiles
 COPY --chown=pixabay_feed Gemfile* /myapp/
 
+USER root
 RUN bundle install
+USER pixabay_feed
 
 # Copy the current directory contents into the container at /myapp
 COPY --chown=pixabay_feed . /myapp
