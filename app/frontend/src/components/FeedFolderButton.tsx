@@ -5,7 +5,7 @@ import {styled} from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 import Card from "@mui/material/Card";
 import {useRecoilState, useSetRecoilState} from "recoil";
-import {activeFolderState, feedParametersState} from "../store/atoms";
+import {activeFolderState, feedPaginationState, feedParametersState} from "../store/atoms";
 
 const FolderButton = styled(ButtonBase)(() => ({
   position: 'relative',
@@ -25,16 +25,21 @@ const FolderCard = styled(Card)(() => ({
   borerColor: 'transparent',
   border: 'none',
   '@media (min-width:850px)': {
-    width: '12vw',
-    height: '12vw',
-  }
+    width: 130,
+    height: 130,
+  },
 }));
 
 function FeedFolderButton({ folder }: any): JSX.Element {
   const [params, setParams] = useRecoilState(feedParametersState);
   const setActiveFolder = useSetRecoilState(activeFolderState);
+  const [pagination, setPagination] = useRecoilState(feedPaginationState);
 
   const handleClick = () => {
+    setPagination({
+      ...pagination,
+      page: 1,
+    });
     setParams({
       ...params,
       q: folder.query,

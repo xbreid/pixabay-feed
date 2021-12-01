@@ -14,6 +14,8 @@ function FormField({ name, type, label, error }: any): JSX.Element {
 
   return (
     <Field name={name}>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore */}
       {({field, form: { setFieldValue }}) => (
         <InputField
           style={{ width: '100%' }}

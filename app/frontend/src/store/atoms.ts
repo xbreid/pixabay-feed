@@ -4,7 +4,7 @@ const feedPaginationState = atom({
   key: 'feedPaginationState',
   default: {
     page: 1,
-    per_page: 15,
+    per_page: 10,
   }
 });
 
@@ -22,8 +22,20 @@ const activeFolderState = atom({
   default: null
 });
 
+const feedDrawerOpen = atom({
+  key: 'feedDrawerOpen',
+  default: false
+});
+
+const feedDrawerContent = atom({
+  key: 'feedDrawerContent',
+  default: null
+});
+
 export {
   feedPaginationState,
   feedParametersState,
-  activeFolderState
+  activeFolderState,
+  feedDrawerOpen,
+  feedDrawerContent,
 };

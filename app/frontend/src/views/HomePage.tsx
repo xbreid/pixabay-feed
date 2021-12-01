@@ -16,8 +16,9 @@ const HomeSubtitle = styled(Typography)(() => ({
 
 const HomeButton = styled(Button)(() => ({
   borderRadius: 1,
-  padding: '12px 32px',
+  padding: 0,
   '& > a': {
+    padding: '12px 32px',
     textDecoration: 'none'
   }
 }));
