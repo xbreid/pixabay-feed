@@ -15,8 +15,12 @@ function getUrlExtension(url: string): string | undefined {
   return stack?.trim();
 }
 
+const numberWithCommas = (x: number | string) =>
+  x && x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
 export {
   // eslint-disable-next-line import/prefer-default-export
   fetchData,
   getUrlExtension,
+  numberWithCommas,
 };

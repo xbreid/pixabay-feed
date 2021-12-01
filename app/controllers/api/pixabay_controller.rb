@@ -8,6 +8,7 @@ class Api::PixabayController < ApplicationController
     @res = @client.photos(**@params)
     results = Serializer.build do |json|
       json.data @res['hits']
+      json.total @res['total']
     end
     render json: results, status: :ok
   end
@@ -17,6 +18,7 @@ class Api::PixabayController < ApplicationController
     @res = @client.videos(**@params)
     results = Serializer.build do |json|
       json.data @res['hits']
+      json.total @res['total']
     end
     render json: results, status: :ok
   end

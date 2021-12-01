@@ -5,7 +5,10 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
+import {useSetRecoilState} from "recoil";
+import ReactPlayer from "react-player";
 import {getUrlExtension} from "../utils";
+import {feedDrawerContent, feedDrawerOpen} from "../store/atoms";
 
 const ListItemButton = styled(ButtonBase)(() => ({
   width: '100%',
@@ -19,7 +22,11 @@ const FeedListCard = styled(Card)(() => ({
   padding: 12,
   width: '100%',
   borderRadius: '18px',
-  border: 'none'
+  border: 'none',
+  transition: '300ms all ease',
+  '&:hover': {
+    background: '#E5E4E2'
+  }
 }));
 
 const FeedListChip = styled(Chip)(() =>  ({
@@ -35,18 +42,40 @@ const FeedListChip = styled(Chip)(() =>  ({
 }));
 
 function FeedListItem({ item }: any): JSX.Element {
+  const setOpen = useSetRecoilState(feedDrawerOpen);
+  const setContent = useSetRecoilState(feedDrawerContent);
+
+  const handleClick = () => {
+    setOpen(true);
+    setContent(item);
+  };
+
   return (
-    <ListItemButton focusRipple>
+    <ListItemButton onClick={handleClick} focusRipple>
       <FeedListCard className="flex flex--align-center flex--justify-sb" variant="outlined">
         <div className="flex flex--align-center">
-          <CardMedia
-            component="img"
-            height="50"
-            width="50"
-            image={item.previewURL}
-            alt="red bull"
-            style={{ width: 50, borderRadius: 12 }}
-          />
+          { item.type === 'film' && (
+            <div style={{ width: 50, height: 50 }}>
+              <div className='player-wrapper'>
+                <ReactPlayer
+                  className='react-player'
+                  url={item.videos.tiny.url}
+                  width='100%'
+                  height='100%'
+                />
+              </div>
+            </div>
+          )}
+          { item.type === 'photo' && (
+            <CardMedia
+              component="img"
+              height="50"
+              width="50"
+              image={item.previewURL}
+              alt="red bull"
+              style={{ width: 50, borderRadius: 12 }}
+            />
+          )}
           <div style={{ marginLeft: 12 }} className="flex flex--column flex--align-start">
             <Typography
               className="truncate"

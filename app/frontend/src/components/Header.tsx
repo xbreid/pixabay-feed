@@ -1,21 +1,24 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import {useNavigate} from "react-router-dom";
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import {styled} from "@mui/material/styles";
+import {Link} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Logo from '../assets/Pixabay-logo.png';
 
+const HeaderBar = styled(AppBar)(() => ({
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
+}));
 
 function Header(): JSX.Element {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,12 +29,18 @@ function Header(): JSX.Element {
     setAnchorEl(null);
   };
 
+  const handleLogout = async () => {
+    await auth.signout(() => {
+      navigate('/login', { replace: true });
+    });
+  };
+
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Pexabay Feed
-        </Typography>
+    <HeaderBar position="static">
+      <Toolbar className="flex flex--justify-sb">
+        <Link to="/">
+          <img height="23" src={Logo} alt="logo" />
+        </Link>
         {auth.user && (
           <div>
             <IconButton
@@ -42,30 +51,24 @@ function Header(): JSX.Element {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle sx={{ color: '#333' }} />
             </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
               <MenuItem disabled onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
         )}
       </Toolbar>
-    </AppBar>
+    </HeaderBar>
   );
 }
 

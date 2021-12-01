@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import FeedList from "../components/FeedList";
-import FeedBanner from "../components/FeedBanner";
-import FeedFolderButton from "../components/FeedFolderButton";
 import {useRecoilValue} from "recoil";
+import FeedList from "../components/FeedList";
+import FeedFolderButton from "../components/FeedFolderButton";
 import {activeFolderState} from "../store/atoms";
+import ContentDrawer from "../components/ContentDrawer";
+import FeedListLoader from "../components/FeedListLoader";
+// import FeedBanner from "../components/FeedBanner";
 
 // Accepted Values
 // backgrounds, fashion, nature, science, education, feelings, health, people, religion, places, animals,
@@ -51,22 +53,24 @@ function FeedPage(): JSX.Element {
   const activeFolder = useRecoilValue(activeFolderState);
 
   return (
-    <article>
-      <FeedBanner />
-      <br />
-      <Typography variant="h6">Folders</Typography>
-      <section>
-        {folderCategories.map((folder) => (
-          <FeedFolderButton key={folder.label} folder={folder} />
-        ))}
-      </section>
-      <br />
-      <Typography variant="h6">{`${activeFolder || 'Media'} Feed`}</Typography>
-      <React.Suspense fallback={<div>loading...</div>}>
-        <FeedList />
-      </React.Suspense>
-      <br />
-    </article>
+    <div className="Container">
+      <article>
+        {/* <FeedBanner /> */}
+        {/* <Typography variant="h6">Folders</Typography> */}
+        <section>
+          {folderCategories.map((folder) => (
+            <FeedFolderButton key={folder.label} folder={folder} />
+          ))}
+        </section>
+        <br />
+        <Typography variant="h6">{`${activeFolder || 'Media'} Feed`}</Typography>
+        <React.Suspense fallback={<FeedListLoader />}>
+          <FeedList />
+        </React.Suspense>
+        <ContentDrawer />
+        <br />
+      </article>
+    </div>
   );
 }
 
