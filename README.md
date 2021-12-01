@@ -45,13 +45,15 @@ Since this project was spun up using [Vite](https://vitejs.dev/), it's purely a 
 
 Styles in this project are written in SASS using SCSS syntax. Implementation is handled by node-sass, and esbuild. BEM styling model was used.
 
+Some Styles exist in Material UI JSX styles as well. At the component level.
+
 ### Animations/Transitions
 
-All Animations and transitions are done through react-pose and pure SCSS.
+All Animations and transitions are done through Framer Motion and pure SCSS.
 
 ### Design
 
-I followed I very minimalist design approach. The site was styled mobile first, meaning media queries are done for tablet, desktop.
+I followed I very minimalist design approach. The site was styled mobile first, meaning media queries are done for tablet, desktop. Also used Material UI Design to help rapid prototype this project.
 
 ## ⚙️ Back-End Architecture
 <a name="back-end"/>
@@ -70,6 +72,12 @@ Currently the project is using JWTs to authorize users and provides a valid 48 h
 ### Production Deployments
 Due to time constraints, this projects doesn't have much set up for an optimized production environment. Currently the site is hosted using Vite's Preview functionality which is not meant for a scalable production environment.
 
+### Material UI
+I really only like to use Material UI when it's for rapid prototyping, but felt the need to use it to meet my goals for this project. Tradeoffs come with this, like having to use their inline JSX styling, and their bundle is rather large and bloated.
+
+### Polished Authentication
+Due to time constraints, I didn't have much time to polish authentication, by blacklisting JWTs when they expire, and remembering the user after they login/signup.
+
 ### Testing
 <a name="testing"/>
 
@@ -81,4 +89,3 @@ Unit Testing to come soon hopefully, but right now no unit tests have been creat
 
 1. Unit Testing
 
-1. UI Build out

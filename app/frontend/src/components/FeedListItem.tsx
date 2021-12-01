@@ -5,10 +5,10 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-import {getUrlExtension} from "../utils";
 import {useSetRecoilState} from "recoil";
-import {feedDrawerContent, feedDrawerOpen} from "../store/atoms";
 import ReactPlayer from "react-player";
+import {getUrlExtension} from "../utils";
+import {feedDrawerContent, feedDrawerOpen} from "../store/atoms";
 
 const ListItemButton = styled(ButtonBase)(() => ({
   width: '100%',
@@ -22,7 +22,11 @@ const FeedListCard = styled(Card)(() => ({
   padding: 12,
   width: '100%',
   borderRadius: '18px',
-  border: 'none'
+  border: 'none',
+  transition: '300ms all ease',
+  '&:hover': {
+    background: '#E5E4E2'
+  }
 }));
 
 const FeedListChip = styled(Chip)(() =>  ({

@@ -24,10 +24,14 @@ const FolderCard = styled(Card)(() => ({
   borderRadius: '28px',
   borerColor: 'transparent',
   border: 'none',
+  transition: '300ms all ease',
   '@media (min-width:850px)': {
     width: 130,
     height: 130,
   },
+  '&:hover': {
+    background: '#E5E4E2'
+  }
 }));
 
 function FeedFolderButton({ folder }: any): JSX.Element {
