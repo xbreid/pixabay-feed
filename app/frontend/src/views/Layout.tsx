@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { Outlet } from "react-router-dom";
+import Header from '../components/Header';
 
 function Layout(): JSX.Element {
   return (
-    <div className="App">
-      <header>header</header>
-      <Outlet />
-    </div>
+    <>
+      <Header />
+      <div className="App">
+        <Outlet />
+      </div>
+    </>
   );
 }
 

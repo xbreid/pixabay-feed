@@ -1,16 +1,29 @@
 import { atom } from 'recoil';
 
-const AuthContextState = atom<AuthContextType | null>({
-  key: 'AuthContextState',
-  default: null
+const feedPaginationState = atom({
+  key: 'feedPaginationState',
+  default: {
+    page: 1,
+    per_page: 15,
+  }
 });
 
-const userState = atom<any>({
-  key: 'userState',
+const feedParametersState = atom({
+  key: 'feedParametersState',
+  default: {
+    q: '',
+    category: '',
+    type: 'photos',
+  }
+});
+
+const activeFolderState = atom({
+  key: 'activeFolderState',
   default: null
 });
 
 export {
-  AuthContextState,
-  userState
+  feedPaginationState,
+  feedParametersState,
+  activeFolderState
 };

@@ -7,7 +7,7 @@ class Api::PixabayController < ApplicationController
   def photos
     @res = @client.photos(**@params)
     results = Serializer.build do |json|
-      json.res @res
+      json.data @res['hits']
     end
     render json: results, status: :ok
   end
@@ -16,7 +16,7 @@ class Api::PixabayController < ApplicationController
   def videos
     @res = @client.videos(**@params)
     results = Serializer.build do |json|
-      json.res @res
+      json.data @res['hits']
     end
     render json: results, status: :ok
   end
