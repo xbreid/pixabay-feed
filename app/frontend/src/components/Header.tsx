@@ -11,8 +11,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import {styled} from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
+import {Link} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Logo from '../assets/Pixabay-logo.png';
 
+const HeaderBar = styled(AppBar)(() => ({
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
+}));
 
 function Header(): JSX.Element {
   const auth = useAuth();
@@ -27,11 +35,11 @@ function Header(): JSX.Element {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Pexabay Feed
-        </Typography>
+    <HeaderBar position="static">
+      <Toolbar className="flex flex--justify-sb">
+        <Link to="/">
+          <img height="23" src={Logo} alt="logo" />
+        </Link>
         {auth.user && (
           <div>
             <IconButton
@@ -42,20 +50,14 @@ function Header(): JSX.Element {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle sx={{ color: '#333' }} />
             </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
@@ -65,7 +67,7 @@ function Header(): JSX.Element {
           </div>
         )}
       </Toolbar>
-    </AppBar>
+    </HeaderBar>
   );
 }
 

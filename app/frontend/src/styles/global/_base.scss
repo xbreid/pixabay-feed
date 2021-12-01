@@ -10,7 +10,8 @@ body {
   font-family: Roboto, sans-serif;
   overflow: hidden;
   height: 100vh;
-  background: #F7F7F7;
+  background: rgb(253,251,251);
+  background: linear-gradient(90deg, rgba(253,251,251,1) 30%, rgba(235,237,238,1) 100%);
 }
 
 body {
@@ -99,9 +100,8 @@ textarea {
   }
 }
 
-.App {
-  height: 100vh;
-  background: #F7F7F7;
+.Container {
+  height: calc(100vh - 56px);
   padding: 16px;
   max-width: 1040px;
   margin: 0 auto;

@@ -6,9 +6,7 @@ function Layout(): JSX.Element {
   return (
     <>
       <Header />
-      <div className="App">
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   );
 }
