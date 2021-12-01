@@ -22,6 +22,7 @@
     "react-hooks/rules-of-hooks": "off",
     "react/prop-types": "off",
     "no-console": "off",
+    "react/jsx-no-bind": "off",
     "import/extensions": "off",
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",

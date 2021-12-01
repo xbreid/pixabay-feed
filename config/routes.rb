@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     resources :users, param: :_username
     get 'photos', to: 'pixabay#photos', as: 'photos'
     get 'videos', to: 'pixabay#videos', as: 'videos'
+    post '/auth/login', to: 'authentication#login'
   end
 
-  post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
 end

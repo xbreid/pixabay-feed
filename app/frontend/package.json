@@ -13,6 +13,10 @@
     "lint:watch": "esw src --ext .ts,.tsx"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.0",
+    "@mui/material": "^5.2.2",
     "classnames": "^2.3.1",
     "concurrently": "^6.4.0",
     "formik": "^2.2.9",

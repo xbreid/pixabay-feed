@@ -15,19 +15,20 @@ const FormSchema = Yup.object().shape({
   password: Yup.string().required('Please enter your password')
 });
 
-function LoginPage(): JSX.Element {
+function SignupPage(): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
-  const initialValues: LoginFormFields = {
+  const initialValues: CreateFormFields= {
     email: '',
     password: '',
+    password_confirmation: '',
   };
 
   const from = location.state?.from?.pathname || "/";
 
-  async function handleSubmit(values: LoginFormFields) {
-    await auth.signin(values, () => {
+  async function handleSubmit(values: CreateFormFields) {
+    await auth.signup(values, () => {
       navigate(from, { replace: true });
     });
   }
@@ -42,7 +43,7 @@ function LoginPage(): JSX.Element {
         {/* eslint-disable-next-line no-unused-vars */}
         {({errors, touched}) => (
           <Form>
-            <Typography variant="h5">Login</Typography>
+            <Typography variant="h5">Sign Up</Typography>
             <Field name='email'>
               {({field, form: { setFieldValue }}) => (
                 <TextField
@@ -77,10 +78,24 @@ function LoginPage(): JSX.Element {
                 />
               )}
             </Field>
-            <br />
-            <br />
+            <Field name='password_confirmation'>
+              {({field, form: { setFieldValue }}) => (
+                  <TextField
+                    variant="outlined"
+                    label="Corfirm Password"
+                    type="password"
+                    name="password_confirmation"
+                    onChange={(event: React.ChangeEventHandler, newValue: string) => {
+                      const nextValue = newValue || '';
+                      setFieldValue('password', nextValue);
+                    }}
+                    error={errors.password_confirmation && touched.password_confirmation}
+                    {...field}
+                  />
+              )}
+            </Field>
             <Button color="primary" type="submit" variant="contained">
-              Log In
+              Sign Up
             </Button>
           </Form>
         )}
@@ -89,4 +104,4 @@ function LoginPage(): JSX.Element {
   );
 }
 
-export default LoginPage;
+export default SignupPage;
