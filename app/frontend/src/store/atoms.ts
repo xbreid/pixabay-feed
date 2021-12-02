@@ -32,10 +32,26 @@ const feedDrawerContent = atom({
   default: null
 });
 
+const globalMessageOpen = atom({
+  key: 'globalMessageOpen',
+  default: false,
+});
+
+const globalMessage = atom({
+  key: 'globalMessage',
+  default: {
+    severity: 'info',
+    message: '',
+    duration: 6000
+  }
+});
+
 export {
   feedPaginationState,
   feedParametersState,
   activeFolderState,
   feedDrawerOpen,
   feedDrawerContent,
+  globalMessage,
+  globalMessageOpen,
 };

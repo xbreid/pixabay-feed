@@ -12,7 +12,14 @@ import SubmitButton from "../components/SubmitButton";
 import FormField from "../components/FormField";
 
 const FormSchema = Yup.object().shape({
-  email: Yup.string().required('Please enter your email'),
+  email: Yup
+    .string()
+    .required('Please enter your email')
+    .matches(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Must be a valid email address."
+    )
+  ,
   password: Yup.string().required('Please enter your password')
 });
 
@@ -28,9 +35,13 @@ function LoginPage(): JSX.Element {
   // const from = location.state?.from?.pathname || "/";
 
   async function handleSubmit(values: LoginFormFields) {
-    await auth.signin(values, () => {
-      navigate('/feed', { replace: true });
-    });
+    try {
+      await auth.signin(values, () => {
+        navigate('/feed', { replace: true });
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -85,6 +96,7 @@ function LoginPage(): JSX.Element {
                     name="email"
                     type="email"
                     label="Email"
+                    message={errors.email || ''}
                     error={errors.email && touched.email}
                   />
                   <br />
@@ -93,6 +105,7 @@ function LoginPage(): JSX.Element {
                     name="password"
                     type="password"
                     label="Password"
+                    message={errors.password || ''}
                     error={errors.password && touched.password}
                   />
                   <br />

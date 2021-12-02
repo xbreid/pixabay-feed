@@ -10,7 +10,7 @@ const InputField = styled(TextField)(() => ({
   }
 }));
 
-function FormField({ name, type, label, error }: any): JSX.Element {
+function FormField({ name, type, label, error, message }: any): JSX.Element {
 
   return (
     <Field name={name}>
@@ -23,6 +23,7 @@ function FormField({ name, type, label, error }: any): JSX.Element {
           label={label}
           type={type}
           name={name}
+          helperText={message}
           onChange={(event: React.ChangeEventHandler, newValue: string) => {
             const nextValue = newValue || '';
             setFieldValue(name, nextValue);

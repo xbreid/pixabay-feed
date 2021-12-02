@@ -1,6 +1,9 @@
 /**
  * This represents some generic auth provider API Object
  */
+import {useRecoilState} from "recoil";
+import {globalMessage} from "./store/atoms";
+
 const apiAuthProvider = {
   isAuthenticated: false,
   async signin(values: LoginFormFields, callback: CallableFunction) {
@@ -14,12 +17,18 @@ const apiAuthProvider = {
       body: JSON.stringify(values)
     }).then((response) => {
       response.json().then((data) => {
-        apiAuthProvider.isAuthenticated = true;
-        localStorage.setItem('pf_token', data.token);
-        localStorage.setItem('pf_exp', data.exp);
-        callback(data);
+        if (data.error) {
+          callback(data, false);
+        }
+
+        if (data.token) {
+          apiAuthProvider.isAuthenticated = true;
+          localStorage.setItem('pf_token', data.token);
+          localStorage.setItem('pf_exp', data.exp);
+          callback(data, true);
+        }
       });
-    });
+    })
   },
   async signup(values: CreateFormFields, callback: CallableFunction) {
     await fetch('/api/users', {

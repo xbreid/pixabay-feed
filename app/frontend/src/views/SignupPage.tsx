@@ -15,8 +15,25 @@ import FormField from "../components/FormField";
 import SubmitButton from "../components/SubmitButton";
 
 const FormSchema = Yup.object().shape({
-  email: Yup.string().required('Please enter your email'),
-  password: Yup.string().required('Please enter your password')
+  email: Yup
+    .string()
+    .required('Please enter your email')
+    .matches(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Must be a valid email address."
+    )
+  ,
+  password: Yup
+    .string()
+    .required('Please Enter your password')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character."
+    ),
+  password_confirmation: Yup
+    .string()
+    .required()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
 });
 
 function SignupPage(): JSX.Element {
@@ -94,6 +111,9 @@ function SignupPage(): JSX.Element {
                     name="email"
                     type="email"
                     label="Email"
+                    message={
+                      errors.email && touched.email ?
+                      errors.email : ''}
                     error={errors.email && touched.email}
                   />
                   <br />
@@ -102,6 +122,9 @@ function SignupPage(): JSX.Element {
                     name="password"
                     type="password"
                     label="Password"
+                    message={
+                      errors.password && touched.password ?
+                      errors.password : ''}
                     error={errors.password && touched.password}
                   />
                   <br />
@@ -110,6 +133,9 @@ function SignupPage(): JSX.Element {
                     name="password_confirmation"
                     type="password"
                     label="Password Confirmation"
+                    message={
+                      errors.password_confirmation && touched.password_confirmation ?
+                      errors.password_confirmation : ''}
                     error={errors.password_confirmation && touched.password_confirmation}
                   />
                   <br />

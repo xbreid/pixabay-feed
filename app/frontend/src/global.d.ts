@@ -23,6 +23,7 @@ declare global {
     username: string;
     token: string;
     exp: string;
+    error?: string;
   }
 }
 
