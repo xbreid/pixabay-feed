@@ -1,5 +1,3 @@
-import * as React from "react";
-
 declare global {
   interface AuthContextType {
     user: any;
@@ -27,4 +25,4 @@ declare global {
   }
 }
 
-export {}
+export {};

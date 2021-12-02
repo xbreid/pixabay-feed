@@ -1,13 +1,12 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import {styled} from "@mui/material/styles";
-import {Link} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Logo from '../assets/Pixabay-logo.png';
 

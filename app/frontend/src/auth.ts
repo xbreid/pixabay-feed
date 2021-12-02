@@ -1,8 +1,6 @@
 /**
  * This represents some generic auth provider API Object
  */
-import {useRecoilState} from "recoil";
-import {globalMessage} from "./store/atoms";
 
 const apiAuthProvider = {
   isAuthenticated: false,
@@ -28,7 +26,7 @@ const apiAuthProvider = {
           callback(data, true);
         }
       });
-    })
+    });
   },
   async signup(values: CreateFormFields, callback: CallableFunction) {
     await fetch('/api/users', {

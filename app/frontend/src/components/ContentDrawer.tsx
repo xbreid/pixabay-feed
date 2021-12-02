@@ -4,12 +4,12 @@ import {useRecoilState} from "recoil";
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import {styled} from "@mui/material/styles";
-import {feedDrawerContent, feedDrawerOpen} from "../store/atoms";
 import ReactPlayer from 'react-player';
 import Avatar from '@mui/material/Avatar';
 import Typography from "@mui/material/Typography";
 import PhotoIcon from '@mui/icons-material/Photo';
 import VideoFileIcon from '@mui/icons-material/VideoFile';
+import {feedDrawerContent, feedDrawerOpen} from "../store/atoms";
 import {numberWithCommas} from "../utils";
 
 const DrawerWrapper = styled(Drawer)(() => ({
